@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Image Processing</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
@@ -43,11 +43,11 @@
 
     <div id="" class="container text-center justify-content-center">
         <div id="" class="">
-            <button id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
-            <button id="btnFlipHorizontal" class="btn btn-outline-secondary m-1 btnFlipHorizontal">Flip Horizontal <i class="fa-solid fa-arrows-left-right"></i></button>
-            <button id="btnFlipVertical" class="btn btn-outline-secondary m-1 btnFlipVertical">Flip Vertical <i class="fa-solid fa-arrows-up-down"></i></button>
-            <button id="btnGirar90" class="btn btn-outline-secondary m-1 btnGirar90">Girar 90º <i class="fa-solid fa-rotate"></i></button>
-            <button id="btnLooping" class="btn btn-outline-secondary m-1 btnLooping"><i class="fa-solid fa-arrows-spin"></i></button>
+            <button onclick="load()" id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
+            <button onclick="horizontalFlip()" id="btnFlipHorizontal" class="btn btn-outline-secondary m-1 btnFlipHorizontal">Flip Horizontal <i class="fa-solid fa-arrows-left-right"></i></button>
+            <button onclick="verticalFlip()" id="btnFlipVertical" class="btn btn-outline-secondary m-1 btnFlipVertical">Flip Vertical <i class="fa-solid fa-arrows-up-down"></i></button>
+            <button onclick="rotate90Degrees()" id="btnGirar90" class="btn btn-outline-secondary m-1 btnGirar90">Girar 90º <i class="fa-solid fa-rotate"></i></button>
+            <button onclick="loopingImage()" id="btnLooping" class="btn btn-outline-secondary m-1 btnLooping"><i class="fa-solid fa-arrows-spin"></i></button>
         </div>
         <div id="" class="">
             <div id="" class="">
@@ -68,7 +68,7 @@
             <li class="nav-item"><a href="./operacaoPixelAPixel.html" class="nav-link px-2 text-muted">Operações pixel a pixel</a></li>
             <li class="nav-item"><a href="./operacaoEspaciais.html" class="nav-link px-2 text-muted">Operações espaciais</a></li>
             <li class="nav-item"><a href="./ajustes.html" class="nav-link px-2 text-muted">Ajustes de Brilho e Contraste</a></li>
-            <li class="nav-item"><a href="./manipulacaoDaImagem.html" class="nav-link px-2 text-muted">Manipulação da imagem</a></li>
+            <li class="nav-item"><a href="./manipulacaoDaImagem.html" class="nav-link px-2 text-muted active-bold">Manipulação da imagem</a></li>
           </ul>
           <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
         </footer>

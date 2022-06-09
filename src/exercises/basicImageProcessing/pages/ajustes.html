@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Image Processing</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -43,13 +43,13 @@
 
     <div id="" class="container text-center justify-content-center">
         <div id="" class="">
-            <button id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
-            <button id="btnAumentarBrilho" class="btn btn-outline-secondary m-1 btnAumentarBrilho"><i class="fa-solid fa-plus"></i></button>
+            <button onclick="load()" id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
+            <button onclick="brightnessPlus()" id="btnAumentarBrilho" class="btn btn-outline-secondary m-1 btnAumentarBrilho"><i class="fa-solid fa-plus"></i></button>
             <span>Brilho</span>
-            <button id="btnDiminuirBrilho" class="btn btn-outline-secondary m-1 btnGrayscaleCie"><i class="fa-solid fa-minus"></i></button>
-            <button id="btnAumentarContraste" class="btn btn-outline-secondary m-1 btnAumentarContraste"><i class="fa-solid fa-plus"></i></button>
+            <button onclick="brightnessMinus()" id="btnDiminuirBrilho" class="btn btn-outline-secondary m-1 btnGrayscaleCie"><i class="fa-solid fa-minus"></i></button>
+            <button onclick="contrastPlus()" id="btnAumentarContraste" class="btn btn-outline-secondary m-1 btnAumentarContraste"><i class="fa-solid fa-plus"></i></button>
             <span>Contraste</span>
-            <button id="btnDiminuirContraste" class="btn btn-outline-secondary m-1 btnDiminuirContraste"><i class="fa-solid fa-minus"></i></button>
+            <button onclick="contrastMinus()" id="btnDiminuirContraste" class="btn btn-outline-secondary m-1 btnDiminuirContraste"><i class="fa-solid fa-minus"></i></button>
         </div>
         <div id="" class="">
             <div id="" class="">
@@ -69,7 +69,7 @@
             <li class="nav-item"><a href="./processamentoDeCores.html" class="nav-link px-2 text-muted">Processamento de Cores</a></li>
             <li class="nav-item"><a href="./operacaoPixelAPixel.html" class="nav-link px-2 text-muted">Operações pixel a pixel</a></li>
             <li class="nav-item"><a href="./operacaoEspaciais.html" class="nav-link px-2 text-muted">Operações espaciais</a></li>
-            <li class="nav-item"><a href="./ajustes.html" class="nav-link px-2 text-muted">Ajustes de Brilho e Contraste</a></li>
+            <li class="nav-item"><a href="./ajustes.html" class="nav-link px-2 text-muted active-bold">Ajustes de Brilho e Contraste</a></li>
             <li class="nav-item"><a href="./manipulacaoDaImagem.html" class="nav-link px-2 text-muted">Manipulação da imagem</a></li>
           </ul>
           <p class="text-center text-muted">&copy; 2022 Company, Inc</p>

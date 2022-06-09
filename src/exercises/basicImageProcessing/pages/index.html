@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Image Processing</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -43,11 +43,11 @@
 
     <div id="" class="container text-center justify-content-center">
         <div id="" class="">
-            <button id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
-            <button id="btnGrayscale" class="btn btn-outline-secondary m-1 btnGrayscale">Grayscale</button>
-            <button id="btnGrayscaleCie" class="btn btn-outline-secondary m-1 btnGrayscaleCie">Grayscale CIE</button>
-            <button id="btnGrayscaleNtsc" class="btn btn-outline-secondary m-1 btnGrayscaleNtsc">Grayscale NTSC</button>
-            <button id="btnMonochromatic" class="btn btn-outline-dark m-1 btnMonochromatic">Monochromatic</button>
+            <button onclick="load()" id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i class="fa-solid fa-spinner"></i> Load Image</button>
+            <button onclick="grayScale()" id="btnGrayscale" class="btn btn-outline-secondary m-1 btnGrayscale">Grayscale</button>
+            <button onclick="grayScaleCIE()" id="btnGrayscaleCie" class="btn btn-outline-secondary m-1 btnGrayscaleCie">Grayscale CIE</button>
+            <button onclick="grayScaleNTSC()" id="btnGrayscaleNtsc" class="btn btn-outline-secondary m-1 btnGrayscaleNtsc">Grayscale NTSC</button>
+            <button onclick="monoScale()" id="btnMonochromatic" class="btn btn-outline-dark m-1 btnMonochromatic">Monochromatic</button>
         </div>
         <div id="" class="">
             <div id="" class="">
@@ -63,7 +63,7 @@
     <div class="container">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-center border-bottom pb-3 mb-3 links-footer">
-            <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted active-bold">Home</a></li>
             <li class="nav-item"><a href="./processamentoDeCores.html" class="nav-link px-2 text-muted">Processamento de Cores</a></li>
             <li class="nav-item"><a href="./operacaoPixelAPixel.html" class="nav-link px-2 text-muted">Operações pixel a pixel</a></li>
             <li class="nav-item"><a href="./operacaoEspaciais.html" class="nav-link px-2 text-muted">Operações espaciais</a></li>
