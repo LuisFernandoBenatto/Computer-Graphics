@@ -12,8 +12,8 @@
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
   <!-- CSS -->
   <link rel="stylesheet" href="../assets/css/styles.css">
 
@@ -58,12 +58,17 @@
         <img id="img" class="img img-fluid" src="../assets/imgs/nemo.jpg" alt="nemo.jpg">
       </div>
       <button onclick="load()" id="btnLoadImage" class="btn btn-primary m-1 btnLoadImage"><i
-        class="fa-solid fa-spinner"></i> Load Image</button>
-      <button onclick="redScale()" id="btnRedscale" class="btn btn-outline-danger m-1 btnRedscale">Redscale</button>
+          class="fa-solid fa-spinner"></i> Load Image</button>
+      <button onclick="redScale()" id="btnRedscale" class="btn btn-outline-danger m-1 btnRedscale">Red</button>
       <button onclick="greenScale()" id="btnGreenscale"
-        class="btn btn-outline-success m-1 btnGreenscale">Greenscale</button>
+        class="btn btn-outline-success m-1 btnGreenscale">Green</button>
       <button onclick="blueScale()" id="btnBluescale"
-        class="btn btn-outline-primary m-1 btnBluescale">Bluescale</button>
+        class="btn btn-outline-primary m-1 btnBluescale">Blue</button>
+      <button onclick="magenta()" id="btnRedscale" class="btn btn-outline-danger m-1 btnRedscale">Magenta</button>
+      <button onclick="cyan()" id="btnGreenscale"
+        class="btn btn-outline-info m-1 btnGreenscale">Cyan</button>
+      <button onclick="yellow()" id="btnBluescale"
+        class="btn btn-outline-warning m-1 btnBluescale">Yellow</button>
       <div id="" class="div-canvas">
         <h2 id="" class="">Processed</h2>
         <canvas id="image-canvas" class="image-canvas img-fluid"></canvas>
@@ -74,7 +79,8 @@
     <footer class="py-3 my-4">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3 links-footer">
         <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="./processamentoDeCores.html" class="nav-link px-2 text-muted active-bold">Processamento de
+        <li class="nav-item"><a href="./processamentoDeCores.html"
+            class="nav-link px-2 text-muted active-bold">Processamento de
             Cores</a></li>
         <li class="nav-item"><a href="./operacaoPixelAPixel.html" class="nav-link px-2 text-muted">Operações pixel a
             pixel</a></li>
