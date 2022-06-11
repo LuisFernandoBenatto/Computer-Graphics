@@ -1,38 +1,58 @@
-import cv2
+import cv2 as cv
+from matplotlib import pyplot as plt
 import imutils
 import numpy
 
-image = cv2.imread("imgs/coins.jpg")
-cv2.imshow("1 original", image)
+img = cv.imread('./imgs/coins2.jpg')
 
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-cv2.imshow("2 gray", image_gray)
+image_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
-image_blur = cv2.medianBlur(image_gray, 5)
-cv2.imshow("3 mediana", image_blur)
+image_blur = cv.medianBlur(image_gray, 5)
 
-image_res ,image_thresh = cv2.threshold(image_blur,230,255,cv2.THRESH_BINARY_INV + 
-                                            cv2.THRESH_OTSU)
+image_res ,image_thresh = cv.threshold(image_blur, 230, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)
 print("Limiar: ", image_res)
-cv2.imshow("4 limiar", image_thresh)
 
-kernel = numpy.ones((3,3),numpy.uint8)
-morpho = cv2.morphologyEx(image_thresh,cv2.MORPH_DILATE ,kernel)
-cv2.imshow("5 morfologia: ", morpho)
+kernel = numpy.ones((3,3), numpy.uint8)
+morpho = cv.morphologyEx(image_thresh, cv.MORPH_DILATE, kernel)
 
 kernel2 = numpy.ones((3,3),numpy.uint8)
-morpho = cv2.morphologyEx(morpho,cv2.MORPH_DILATE ,kernel2)
-cv2.imshow("6 morfologia: ", morpho)
+morpho_2 = cv.morphologyEx(morpho, cv.MORPH_DILATE, kernel2)
 
-cnts = cv2.findContours(morpho.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+kernel3 = numpy.ones((3,3),numpy.uint8)
+morpho_3 = cv.morphologyEx(morpho_2, cv.MORPH_DILATE, kernel3)
+
+titles = [
+          '1 - Original Image',
+          '2 - Image Gray',
+          '3 - Mediana',
+          '4 - Limiar',
+          '5 - Morfologia',
+          '6- Morfologia',
+          '7 - Morfologia',
+         ]
+images = [
+          img, 
+          image_gray,
+          image_blur,
+          image_thresh,
+          morpho,
+          morpho_2,
+          morpho_3,
+        ]
+
+cnts = cv.findContours(morpho_3.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
 cnts = imutils.grab_contours(cnts)
 objects = str(len(cnts))
 
-text = "Objetos encontrados:"+str(objects)
-cv2.putText(image, text, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 1)
+print("Quantidade de objetos: " + objects)
 
-print(objects)
-cv2.imshow("7 contagem", image)
+for i in range(len(images)):
+    plt.subplot(3,3,i+1)
+    plt.imshow(images[i], 'gray',vmin=0,vmax=255)
+    plt.title(titles[i])
+    plt.xticks([])
+    plt.yticks([])
+plt.show()
 
-cv2.waitKey(0)
+print('Version: ' + cv.__version__)
