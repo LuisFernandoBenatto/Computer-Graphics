@@ -317,11 +317,42 @@ let median = function () {
 }
 
 
-let gausiano = function () {
-    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    let img = new MatrixImage(imageData);
-
-    context.putImageData(img.imageData, 0, 0);
+let gaussian = function () {
+    const radius = 8;
+    const blur = radius;
+    const blurRange = blur * 3;
+    const gaussParam = new Array;
+    for (let i = 0; i <= blurRange; i++){
+      gaussParam[i] = Math.exp(-i * i / (2 * blur * blur));
+    }
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const img = new MatrixImage(imageData);
+    const width = img.width;
+    const height = img.height;
+    const data = imageData.data;
+    let ox, oy, gauss, count, R, G, B, A;
+    for(let i = 0, len = width * height; i<len; i++){
+        gauss = count = R = G = B = A = 0;
+        ox = i % width;
+        oy = (i / width)|0; // = Math.floor(i / width);
+        for (let x = -1 * blurRange; x <= blurRange; x++){
+            const tx = ox + x;
+            if ((0 <= tx) && (tx < width)){
+                gauss = gaussParam[x<0?-x:x]; // = [Math.abs(x)]
+                const k = i + x;
+                R += data[k*4 + 0] * gauss;
+                G += data[k*4 + 1] * gauss;
+                B += data[k*4 + 2] * gauss;
+                A += data[k*4 + 3] * gauss;
+                count += gauss;
+            }
+        }
+        data[i*4 + 0] = (R / count)|0;
+        data[i*4 + 1] = (G / count)|0;
+        data[i*4 + 2] = (B / count)|0;
+        data[i*4 + 3] = (A / count)|0;
+    }
+    context.putImageData(imageData, 0, 0);
 }
 
 
@@ -375,6 +406,7 @@ let contrast = function() {
     }
     context.putImageData(imageData, 0, 0);
 }
+
 
 let horizontalFlip = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
