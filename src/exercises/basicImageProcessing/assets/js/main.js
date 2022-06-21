@@ -383,6 +383,7 @@ let brightnessMinus = function () {
     context.putImageData(img.imageData, 0, 0);
 }
 
+
 let contrast = function() {
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
