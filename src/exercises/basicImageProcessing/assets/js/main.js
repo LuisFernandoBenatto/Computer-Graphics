@@ -320,10 +320,12 @@ let median = function () {
 let gaussian = function () {
     const radius = 8;
     const blur = radius;
-    const blurRange = blur * 3;
+    const blurRange = blur;
+    // const blurRange = blur * 1.5;
     const gaussParam = new Array;
     for (let i = 0; i <= blurRange; i++){
-      gaussParam[i] = Math.exp(-i * i / (2 * blur * blur));
+      gaussParam[i] = Math.exp(-i * i / (2 * blur));
+    //   gaussParam[i] = Math.exp(-i * i / (2 * blur * blur));
     }
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     const img = new MatrixImage(imageData);
