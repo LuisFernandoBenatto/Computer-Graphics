@@ -1,11 +1,11 @@
-import cv2
-import pytesseract
+import cv2 as cv
+import pytesseract as tess
 
-pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+tess.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 # pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-img = cv2.imread("./imgs/teste2.png")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-ret, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
-text = pytesseract.image_to_string(binary, lang='por')
+img = cv.imread("./imgs/teste3.png")
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+ret, binary = cv.threshold(gray, 0, 255, cv.THRESH_OTSU | cv.THRESH_BINARY_INV)
+text = tess.image_to_string(binary, lang='por')
 print(text)
