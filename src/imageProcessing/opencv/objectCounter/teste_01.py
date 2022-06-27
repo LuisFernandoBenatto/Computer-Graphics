@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import imutils
 import numpy
 
-img = cv.imread('./imgs/coins2.jpg')
+img = cv.imread('./assets/imgs/coins2.jpg')
 
 image_blur = cv.medianBlur(img, 35)
 

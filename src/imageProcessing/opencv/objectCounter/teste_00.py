@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 import sys
-img = cv.imread('./imgs/img_1.jpg')
+img = cv.imread('./assets/imgs/img_1.jpg')
 
 if img is None:
     sys.exit("Could not read the image.")
