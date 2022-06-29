@@ -4,8 +4,9 @@ import cv2 as cv
 import imutils
 import sys
 
-img = cv.imread('../images/brickImage_03.jpeg')
-# img = cv.imread('../images/brickImage_10.webg')
+# img = cv.imread('../images/brickImage_03.jpeg')
+img = cv.imread('../images/brickImage_10.webp')
+
 if img is None:
     sys.exit("Could not read the image!")
 cv.imshow('Original Image', img)
@@ -13,10 +14,7 @@ cv.imshow('Original Image', img)
 img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Gray', img_gray)
 
-img_blur = cv.GaussianBlur(img_gray, (3,3), cv.BORDER_DEFAULT)
-cv.imshow('Blur', img_blur)
-
-ret, img_thresh = cv.threshold(img_blur, 90, 255, cv.THRESH_BINARY)
+ret, img_thresh = cv.threshold(img_gray, 90, 255, cv.THRESH_BINARY)
 print("ret: ", ret)
 cv.imshow('Binary', img_thresh)
 
@@ -35,8 +33,9 @@ def _flag(image, contours):
         ((x, y), _) = cv.minEnclosingCircle(c)
         cv.drawContours(image, [c], -1, (0, 255, 0), 2)
 
-_flag(img, contours)
-print(f"Numero de tijolo: {len(contours)}")
-cv.imshow('Image', img)
-print('Version: ' + cv.__version__)
-cv.waitKey(0)
+if __name__ == "__main__":
+    _flag(img, contours)
+    print(f"Numero de tijolo: {len(contours)}")
+    cv.imshow('Image', img)
+    print('Version: ' + cv.__version__)
+    cv.waitKey(0)

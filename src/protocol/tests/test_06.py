@@ -37,8 +37,9 @@ def _flag(image, contours):
         ((x, y), _) = cv.minEnclosingCircle(c)
         cv.drawContours(image, [c], -1, (0, 255, 0), 2)
 
-_flag(img, contours)
-print(f"Numero de tijolo: {len(contours)}")
-cv.imshow('Image', img)
-print('Version: ' + cv.__version__)
-cv.waitKey(0)
+if __name__ == "__main__":
+    _flag(img, contours)
+    print(f"Numero de tijolo: {len(contours)}")
+    cv.imshow('Image', img)
+    print('Version: ' + cv.__version__)
+    cv.waitKey(0)

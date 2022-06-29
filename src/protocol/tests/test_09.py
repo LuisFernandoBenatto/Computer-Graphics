@@ -4,7 +4,7 @@ import cv2 as cv
 import imutils
 import sys
 
-img = cv.imread('../images/brickImage_09.jpg')
+img = cv.imread('../images/brickImage_09.png')
 if img is None:
     sys.exit("Could not read the image!")
 cv.imshow('Original Image', img)
@@ -28,10 +28,11 @@ contours = imutils.grab_contours(contours)
 def _flag(image, contours):
     for (i, c) in enumerate(contours):
         ((x, y), _) = cv.minEnclosingCircle(c)
-        cv.drawContours(image, [c], -1, (0, 255, 0), 2)
-
-_flag(img, contours)
-print(f"Numero de tijolo: {len(contours)}")
-cv.imshow('Image', img)
-print('Version: ' + cv.__version__)
-cv.waitKey(0)
+        cv.drawContours(image, [c], -1, (255, 55, 55), 2)
+        
+if __name__ == "__main__":
+    _flag(img, contours)
+    print(f"Numero de tijolo: {len(contours)}")
+    cv.imshow('Image', img)
+    print('Version: ' + cv.__version__)
+    cv.waitKey(0)

@@ -21,7 +21,7 @@ print("ret: ", ret)
 cv.imshow('Binary', img_thresh)
 
 kernel = np.ones((3,3), np.uint8)
-erode = cv.erode(img_thresh, kernel, iterations = 10)
+erode = cv.erode(img_thresh, kernel, iterations = 11)
 cv.imshow('Erode', erode)
 
 contours = cv.findContours(erode, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
