@@ -29,6 +29,12 @@ cv.imshow('Morfologia', morpho)
 contours = cv.findContours(morpho, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 contours = imutils.grab_contours(contours)
 
+def rescaleFrame(frame, scale=0.5):
+    width = int(frame.shape[1] * scale)
+    height = int(frame.shape[0] * scale)
+    dimensions = (width, height)
+    return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+
 def _flag(image, contours):
     for (i, c) in enumerate(contours):
         ((x, y), _) = cv.minEnclosingCircle(c)
@@ -38,5 +44,6 @@ if __name__ == "__main__":
     _flag(img, contours)
     print(f"Numero de tijolo: {len(contours)}")
     cv.imshow('Image', img)
+    img_resized = rescaleFrame(img)
     print('Version: ' + cv.__version__)
     cv.waitKey(0)

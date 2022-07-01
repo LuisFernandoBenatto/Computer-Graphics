@@ -4,29 +4,26 @@ import cv2 as cv
 import imutils
 import sys
 
-# img = cv.imread('../images/brickImage_03.jpeg')
-# img = cv.imread('../images/brickImage_10.webp')
-img = cv.imread('../images/brickImage_07.jpg')
-
+img = cv.imread('../images/brickImage_04.jpeg')
 if img is None:
     sys.exit("Could not read the image!")
 cv.imshow('Original Image', img)
 
-img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+blank = np.zeros(img.shape[:2], dtype='uint8')
+b,g,r = cv.split(img)
+red = cv.merge([r,r,r])
+cv.imshow('Red', red)
+
+img_gray = cv.cvtColor(red, cv.COLOR_BGR2GRAY)
 cv.imshow('Gray', img_gray)
 
-ret, img_thresh = cv.threshold(img_gray, 90, 255, cv.THRESH_BINARY)
+ret, img_thresh = cv.threshold(img_gray, 200, 255, cv.THRESH_BINARY)
 print("ret: ", ret)
 cv.imshow('Binary', img_thresh)
 
 kernel = np.ones((3,3), np.uint8)
-erode = cv.erode(img_thresh, kernel, iterations = 2)
-cv.imshow('Erode', erode)
 
-morpho = cv.morphologyEx(erode, cv.MORPH_ERODE, kernel)
-cv.imshow('Morfologia', morpho)
-
-contours = cv.findContours(morpho, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+contours = cv.findContours(img_thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 contours = imutils.grab_contours(contours)
 
 def _flag(image, contours):

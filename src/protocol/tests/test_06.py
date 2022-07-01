@@ -4,7 +4,7 @@ import cv2 as cv
 import imutils
 import sys
 
-img = cv.imread('../images/brickImage_06.jpg')
+img = cv.imread('../images/brickImage_08.jpg')
 if img is None:
     sys.exit("Could not read the image!")
 cv.imshow('Original Image', img)
@@ -19,18 +19,21 @@ ret, img_thresh = cv.threshold(img_blur, 150, 255, cv.THRESH_BINARY_INV)
 print("ret: ", ret)
 cv.imshow('Binary', img_thresh)
 
-kernel = np.ones((3,3), np.uint8)
+kernel = np.ones((2,2), np.uint8)
 erode = cv.erode(img_thresh, kernel, iterations = 3)
 cv.imshow('Erode', erode)
 
 morpho = cv.morphologyEx(erode, cv.MORPH_ERODE, kernel)
 cv.imshow('Morfologia', morpho)
 
-dilation = cv.dilate(morpho, kernel, iterations = 3)
-cv.imshow("Dilation", dilation)
-
-contours = cv.findContours(dilation, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+contours = cv.findContours(morpho, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 contours = imutils.grab_contours(contours)
+
+def rescaleFrame(frame, scale=0.5):
+    width = int(frame.shape[1] * scale)
+    height = int(frame.shape[0] * scale)
+    dimensions = (width, height)
+    return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
 
 def _flag(image, contours):
     for (i, c) in enumerate(contours):
@@ -41,5 +44,6 @@ if __name__ == "__main__":
     _flag(img, contours)
     print(f"Numero de tijolo: {len(contours)}")
     cv.imshow('Image', img)
+    img_resized = rescaleFrame(img)
     print('Version: ' + cv.__version__)
     cv.waitKey(0)
