@@ -1,5 +1,3 @@
-from operator import invert
-from matplotlib import pyplot as plt
 import numpy as np
 import cv2 as cv
 import imutils
@@ -40,7 +38,7 @@ def _flag(image, contours):
 
 if __name__ == "__main__":
     _flag(img, contours)
-    print(f"Numero de tijolo: {len(contours)}")
+    print(f"Número de tijolos: {len(contours)}")
     cv.imshow('Image', img)
     img_resized = rescaleFrame(img)
     cv.imshow('Image', img_resized)

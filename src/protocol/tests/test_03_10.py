@@ -1,12 +1,11 @@
-from matplotlib import pyplot as plt
 import numpy as np
 import cv2 as cv
-import imutils
-import sys
+import imutils as imutils
+import sys as sys
+
 
 # img = cv.imread('../images/brickImage_03.jpeg')
-# img = cv.imread('../images/brickImage_10.webp')
-img = cv.imread('../images/brickImage_07.jpg')
+img = cv.imread('../images/brickImage_10.webp')
 
 if img is None:
     sys.exit("Could not read the image!")
@@ -29,6 +28,12 @@ cv.imshow('Morfologia', morpho)
 contours = cv.findContours(morpho, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 contours = imutils.grab_contours(contours)
 
+def rescaleFrame(frame, scale=0.5):
+    width = int(frame.shape[1] * scale)
+    height = int(frame.shape[0] * scale)
+    dimensions = (width, height)
+    return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+
 def _flag(image, contours):
     for (i, c) in enumerate(contours):
         ((x, y), _) = cv.minEnclosingCircle(c)
@@ -36,7 +41,9 @@ def _flag(image, contours):
 
 if __name__ == "__main__":
     _flag(img, contours)
-    print(f"Numero de tijolo: {len(contours)}")
+    print(f"Número de tijolos: {len(contours)}")
     cv.imshow('Image', img)
+    img_resized = rescaleFrame(img)
+    cv.imshow('Image', img_resized)
     print('Version: ' + cv.__version__)
     cv.waitKey(0)
