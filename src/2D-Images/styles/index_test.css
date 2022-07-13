@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background: radial-gradient(#0f0, #fff);
+}
+
+canvas {
+    border: #000 solid 4px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+button {
+    border: #000 solid 2px;
+    border-radius: 6px;
+    color: #0f0;
+    font-size: 2rem;
+    margin-top: 10px;
+    padding: 16px 40px;
+    transition: .8s;
+}
+
+button:hover {
+    border: #0f0 solid 2px;
+    background-color: #0f0;
+    color: #fff;
+}
