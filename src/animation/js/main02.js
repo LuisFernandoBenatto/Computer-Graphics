@@ -5,12 +5,25 @@ const init = () => {
     const planeGeometry = initPlaneGeometry();
     const planeMaterial = initPlaneMaterial();
     const plane = initPlane(planeGeometry, planeMaterial);
+    // const spotLight = initSpotLight();
+    // const ambientLight = initAmbientLight();
     const clock = initClock();
     const stats = initStats();
+    const cube = createCube();
+    const sphere = createSphere();
+    const torusKnot = createTorus();
     const hemiLight = initHemiLight();
     const hemiLightHelper = initHemiLightHelper(hemiLight);
     const dirLight = initDirLight();
     const mixers = [];
+
+    // scene.add(cube);
+    // scene.add(sphere);
+    // scene.add(torusKnot);
+
+    // camera.lookAt(scene.position);
+    // scene.add(spotLight);
+    // scene.add(ambientLight);
 
     // LIGHT
     scene.add(hemiLight);
@@ -40,56 +53,43 @@ const init = () => {
     const sky = initSky(skyGeometry, skyMaterial);
     scene.add(sky);
 
+    // LOADER
+    // const loader = new GLTFLoader();
+    // loader.load('./assets/Flamingo.glb', (gltf) => {
+    //     const mesh = gltf.scene.children[0];
+    //     const s = 0.35;
+    //     mesh.scale.set(s, s, s);
+    //     mesh.position.y = 15;
+    //     mesh.rotation.y = -1;
+    //     mesh.castShadow = true;
+    //     mesh.receiveShadow = true;
+    //     scene.add(mesh);
+    //     const mixer = initMixer(mesh, gltf);
+    //     mixers.push(mixer);
+    // });
+
     document.getElementById("webgloutput").appendChild(renderer.domElement);
 
     const trackballControls = initTrackballControls(camera, renderer);
 
-    const geometry = [
-        // [new THREE.TorusKnotGeometry(40, 5, 100, 16), 50],
-        // [new THREE.TorusKnotGeometry(35, 4, 100, 16), 300],
-        // [new THREE.TorusKnotGeometry(20, 3, 100, 16), 1000],
-        // [new THREE.TorusKnotGeometry(18, 3, 100, 16), 2000],
-        // [new THREE.TorusKnotGeometry(17, 2, 100, 16), 8000]
-        [new THREE.IcosahedronGeometry(100, 16), 50],
-        [new THREE.IcosahedronGeometry(100, 8), 300],
-        [new THREE.IcosahedronGeometry(100, 4), 1000],
-        [new THREE.IcosahedronGeometry(100, 2), 2000],
-        [new THREE.IcosahedronGeometry(100, 1), 8000]
-    ];
-
-    const material = new THREE.MeshLambertMaterial({
-        color: 0xffffff,
-        wireframe: true
-    });
-
-    for (let j = 0; j < 100; j++) {
-        const lod = new THREE.LOD();
-        for (let i = 0; i < geometry.length; i++) {
-            const mesh = new THREE.Mesh(geometry[i][0], material);
-            mesh.scale.set(1.5, 1.5, 1.5);
-            mesh.updateMatrix();
-            mesh.matrixAutoUpdate = false;
-            lod.addLevel(mesh, geometry[i][1]);
-        }
-
-        lod.position.x = 9000 * (0.5 - Math.random());
-        lod.position.y = 7500 * (0.5 - Math.random());
-        lod.position.z = 9000 * (0.5 - Math.random());
-        lod.updateMatrix();
-        lod.matrixAutoUpdate = false;
-        scene.add(lod);
-    }
-
     const animate = () => {
         requestAnimationFrame(animate);
+        // cube.rotation.x += 0.02;
+        // cube.rotation.y += 0.02;
+        // sphere.rotation.x += 0.02;
+        // sphere.rotation.y += 0.02;
+        // torusKnot.rotation.x += 0.02;
+        // torusKnot.rotation.y += 0.02;
+        // cube.position.set(-20, 10, -20);
+        // sphere.position.set(20, 10, 20);
+        // torusKnot.position.set(-25, 10, 25);
         renderScene();
     }
 
     const controls = {
-        rotationSpeed: 0.01,
-        // bouncingSpeed: 0.01,
+        rotationSpeed: 0.0,
         numberOfObjects: scene.children.length,
-        removeOBJ: function () {
+        remove: function () {
             const allChildren = scene.children;
             const lastObject = allChildren[allChildren.length - 1];
             if (lastObject instanceof THREE.Mesh) {
@@ -97,22 +97,22 @@ const init = () => {
                 this.numberOfObjects = scene.children.length;
             }
         },
-        addSphere: function () {
-            const sphereSize = 10 + Math.ceil((Math.random() * 10));
-            const sphereGeometry = new THREE.SphereGeometry(sphereSize, sphereSize, sphereSize);
-            const sphereMaterial = new THREE.MeshBasicMaterial({
+        addTorus: function () {
+            const torusSize = 5 * Math.ceil((Math.random() * 20));
+            const torusGeometry = new THREE.TorusKnotGeometry(6, 2, torusSize, 16);
+            const torusMaterial = new THREE.MeshBasicMaterial({ 
                 color: Math.random() * 0xffffff,
-                // wireframe: true
+                wireframe: true  
             });
-            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            sphere.castShadow = true;
-            sphere.name = "Sphere__" + sphereSize;
-            sphere.position.x = -50 + Math.round((Math.random() * planeGeometry.parameters.width));
-            sphere.position.y = 10 + Math.round((Math.random() * 5));
-            sphere.position.z = -50 + Math.round((Math.random() * planeGeometry.parameters.height));
-            scene.add(sphere);
+            const torusKnot = new THREE.Mesh(torusGeometry, torusMaterial);
+            torusKnot.castShadow = true;
+            torusKnot.name = "TorusKnot__" + torusSize;
+            torusKnot.position.x = -50 + Math.round((Math.random() * planeGeometry.parameters.width));
+            torusKnot.position.y = 10 + Math.round((Math.random() * 5));
+            torusKnot.position.z = -50 + Math.round((Math.random() * planeGeometry.parameters.height));
+            scene.add(torusKnot);
             this.numberOfObjects = scene.children.length;
-            console.log('Created sphere with name: ' + sphere.name);
+            console.log('Created torusKnot with name: ' + torusKnot.name);
         },
         addHemisphereLight: () => {
             hemiLight.visible = !hemiLight.visible;
@@ -126,14 +126,12 @@ const init = () => {
 
     const gui = new dat.GUI();
     gui.add(controls, 'rotationSpeed', 0, 0.5);
-    // gui.add(controls, 'bouncingSpeed', 0, 0.5);
-    gui.add(controls, 'addSphere');
-    gui.add(controls, 'removeOBJ');
+    gui.add(controls, 'addTorus');
+    gui.add(controls, 'remove');
     gui.add(controls, 'addHemisphereLight');
     gui.add(controls, 'addDirectionalLight');
     gui.add(controls, 'numberOfObjects').listen();
 
-    // let step = 0;
     const renderScene = () => {
         stats.update();
         trackballControls.update(clock.getDelta());
@@ -143,17 +141,10 @@ const init = () => {
             console.log(mixers)
         }
         scene.traverse((e) => {
-            if (e instanceof THREE.Mesh && 
-                e != plane && e != dirLight && 
-                e != dirLightHelper && e != hemiLightHelper && e != hemiLight &&
-                e != sky) {
+            if (e instanceof THREE.Mesh && e != plane) {
                 e.rotation.x += controls.rotationSpeed;
                 e.rotation.y += controls.rotationSpeed;
                 e.rotation.z += controls.rotationSpeed;
-
-                // step += controls.bouncingSpeed;
-                // e.position.x = 20 + 10 * (Math.cos(step));
-                // e.position.y = 20 + 10 * Math.abs(Math.sin(step));
             }
         });
         requestAnimationFrame(renderScene);
@@ -168,22 +159,34 @@ const init = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener('resize', onResize, false);
+
+    // const hemisphereButton = document.getElementById('hemisphereButton');
+    // hemisphereButton.addEventListener('click', () => {
+    //     hemiLight.visible = !hemiLight.visible;
+    //     hemiLightHelper.visible = !hemiLightHelper.visible;
+    // });
+
+    // const directionalButton = document.getElementById('directionalButton');
+    // directionalButton.addEventListener('click', () => {
+    //     dirLight.visible = !dirLight.visible;
+    //     dirLightHelper.visible = !dirLightHelper.visible;
+    // });
 }
 
 const initScene = () => {
     const scene = new THREE.Scene();
-    // const axes = new THREE.AxesHelper(20);
+    const axes = new THREE.AxesHelper(20);
     scene.background = new THREE.Color().setHSL(0.6, 0, 1);
-    scene.fog = new THREE.Fog(scene.background, 1, 15000);
-    // scene.add(axes);
+    scene.fog = new THREE.Fog(scene.background, 1, 5000);
+    scene.add(axes);
     return scene;
 }
 
 const initCamera = () => {
-    const fov = 45; //Camera frustum vertical field of view.
+    const fov = 30; //Camera frustum vertical field of view.
     const aspect = window.innerWidth / window.innerHeight; // Camera frustum aspect ratio.
     const near = 1;//Camera frustum near plane.
-    const far = 15000; //Camera frustum far plane.
+    const far = 5000; //Camera frustum far plane.
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(0, 0, 250);
     return camera;
@@ -216,14 +219,14 @@ const initPlaneGeometry = () => {
 // GroundMat
 const initPlaneMaterial = () => {
     const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-    planeMaterial.color.setHSL(0.195, 1, 0.75);
+    planeMaterial.color.setHSL(0.095, 1, 0.75);
     return planeMaterial;
 
 }
 
 const initPlane = (planeGeometry, planeMat) => {
     const plane = new THREE.Mesh(planeGeometry, planeMat);
-    plane.position.y = -20;
+    plane.position.y = -33;
     plane.rotation.x = -Math.PI / 2;
     // plane.position.set(0, 0, 0);
     plane.receiveShadow = true;
@@ -280,9 +283,9 @@ const createCube = () => {
 const createSphere = () => {
     const sphereSize = 10 + Math.ceil((Math.random() * 20));
     const sphereGeometry = new THREE.SphereGeometry(sphereSize, sphereSize, sphereSize);
-    const sphereMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00FFFF,
-        wireframe: true
+    const sphereMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0x00FFFF, 
+        wireframe: true 
     });
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     sphere.castShadow = true;
@@ -294,9 +297,9 @@ const createSphere = () => {
 const createTorus = () => {
     const torusSize = 2 + Math.ceil((Math.random() * 20));
     const torusGeometry = new THREE.TorusKnotGeometry(10, 3, torusSize * 10, 16);
-    const torusMaterial = new THREE.MeshBasicMaterial({
+    const torusMaterial = new THREE.MeshBasicMaterial({ 
         color: 0xFF00FF,
-        wireframe: true
+        wireframe: true  
     });
     const torusKnot = new THREE.Mesh(torusGeometry, torusMaterial);
     torusKnot.castShadow = true;
@@ -309,7 +312,7 @@ const initHemiLight = () => {
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
     hemiLight.color.setHSL(0.6, 1, 0.6);
     hemiLight.groundColor.setHSL(0.095, 1, 0.75);
-    hemiLight.position.set(0, 100, 0);
+    hemiLight.position.set(0, 50, 0);
     return hemiLight;
 }
 

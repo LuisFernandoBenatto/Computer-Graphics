@@ -3,7 +3,9 @@
 *node_modules
 *package-lock.json
 
-*dat.gui.js
+# *dat.gui.js
 *loader.js
 *three.js
-*trackballControls.js
+# *trackballControls.js
+
+*glb
