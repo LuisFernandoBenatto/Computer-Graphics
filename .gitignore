@@ -1,2 +1,9 @@
-.vscode
-ve38
+*.vscode
+*ve38
+*node_modules
+*package-lock.json
+
+*dat.gui.js
+*loader.js
+*three.js
+*trackballControls.js
