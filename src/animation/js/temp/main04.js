@@ -24,6 +24,7 @@ const init = () => {
     const dirLightHelper = initDirLightHelper(dirLight);
     scene.add(dirLightHelper);
 
+
     // GROUND
     scene.add(plane);
 
@@ -49,7 +50,7 @@ const init = () => {
 
     const trackballControls = initTrackballControls(camera, renderer);
 
-    backgroundSphere(scene);
+    // backgroundSphere(scene);
 
     const animate = (msTime) => {
         requestAnimationFrame(animate);
@@ -82,17 +83,24 @@ const init = () => {
         DirectionalLight: () => {
             dirLight.visible = !dirLight.visible;
             dirLightHelper.visible = !dirLightHelper.visible;
-        }
+        },
+        removeOBJ: function () {
+            const allChildren = scene.children;
+            const lastObject = allChildren[allChildren.length - 1];
+            if (lastObject instanceof THREE.Mesh) {
+                scene.remove(lastObject);
+                this.numberOfObjects = scene.children.length;
+            }
+        },
     }
 
     const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
     cubeRenderTarget.texture.type = THREE.HalfFloatType;
 
     const standardMaterial = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
         envMap: cubeRenderTarget.texture,
         roughness: 0.01,
-        metalness: 0.05,
+        metalness: 1.0
     });
 
     const gui = new dat.GUI();
@@ -126,18 +134,18 @@ const init = () => {
 
 const initScene = () => {
     const scene = new THREE.Scene();
-    const axes = new THREE.AxesHelper(20);
-    scene.background = new THREE.Color().setHSL(204, 100, 72);
-    scene.fog = new THREE.Fog(scene.background, 1, 20000);
-    scene.add(axes);
+    // const axes = new THREE.AxesHelper(20);
+    scene.background = new THREE.Color().setHSL(0.6, 0, 1);
+    scene.fog = new THREE.Fog(scene.background, 1, 15000);
+    // scene.add(axes);
     return scene;
 }
 
 const initCamera = () => {
-    const fov = 45; 
-    const aspect = window.innerWidth / window.innerHeight; 
-    const near = 1;
-    const far = 15000; 
+    const fov = 45; //Camera frustum vertical field of view.
+    const aspect = window.innerWidth / window.innerHeight; // Camera frustum aspect ratio.
+    const near = 1;//Camera frustum near plane.
+    const far = 15000; //Camera frustum far plane.
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(0, 0, 450);
     return camera;
@@ -146,13 +154,22 @@ const initCamera = () => {
 const initRenderer = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setClearColor(new THREE.Color(0xcccccc));
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
+    // renderer.setAnimationLoop(animate);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.shadowMap.enabled = true;
     return renderer;
 }
+
+// const initSpotLight = () => {
+//     const spotLight = new THREE.SpotLight(0xffffff, 1.5, 200, 90);
+//     spotLight.position.set(10, 10, 0);
+//     spotLight.castShadow = true;
+//     return spotLight;
+// }
 
 // GroundGeo
 const initPlaneGeometry = () => {
@@ -162,18 +179,9 @@ const initPlaneGeometry = () => {
 
 // GroundMat
 const initPlaneMaterial = () => {
-    const loader = initLoader();
-    // const texturePlaneMaterial = loader.load('./assets/textura.jpeg');
-    // texturePlaneMaterial.anisotropy = 16;
-    // const planeMaterial = new THREE.MeshLambertMaterial({ 
-    //     // color: 0xffffff,
-    //     map: texturePlaneMaterial,
-    //     fog: false, 
-    // });
-    // planeMaterial.color.setHSL(0.195, 1, 0.75);
-    // return planeMaterial;
-
-    return loader;
+    const planeMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+    planeMaterial.color.setHSL(0.195, 1, 0.75);
+    return planeMaterial;
 }
 
 const initPlane = (planeGeometry, planeMat) => {
@@ -185,10 +193,21 @@ const initPlane = (planeGeometry, planeMat) => {
     return plane;
 }
 
+// const initAmbientLight = () => {
+//     const ambientLight = new THREE.AmbientLight(0x3c3c3c);
+//     return ambientLight;
+// }
+
 const initClock = () => {
     const clock = new THREE.Clock();
     return clock;
 }
+
+// const initMixer = (mesh, gltf) => {
+//     const mixer = new THREE.AnimationMixer(mesh);
+//     mixer.clipAction(gltf.animations[0]).setDuration(1).play();
+//     return mixer;
+// }
 
 function initStats(type) {
     const panelType = (typeof type !== 'undefined' && type) && (!isNaN(type)) ? parseInt(type) : 0;
@@ -210,6 +229,10 @@ function initTrackballControls(camera, renderer) {
 const createCube = () => {
     const cubeSize = 10 + Math.ceil((Math.random() * 20));
     const cubeGeometry = new THREE.BoxGeometry(30, 30, 30);
+    // const cubeMaterial = new THREE.MeshBasicMaterial({
+    //     color: 0xffffff,
+    //     // wireframe: true,
+    // });
     const standardMaterial_ = new THREE.MeshStandardMaterial({
         roughness: 0.1,
         metalness: 0
@@ -223,7 +246,13 @@ const createCube = () => {
 
 const createSphere = (standardMaterial) => {
     const sphereSize = 10 + Math.ceil((Math.random() * 20));
+    // const sphereGeometry = new THREE.SphereGeometry(sphereSize, sphereSize, sphereSize);
     const sphereGeometry = new THREE.IcosahedronGeometry(50, 15);
+
+    // const sphereMaterial = new THREE.MeshBasicMaterial({
+    //     color: 0xffffff,
+    //     // wireframe: true
+    // });
     const sphere = new THREE.Mesh(sphereGeometry, standardMaterial);
     sphere.castShadow = true;
     sphere.name = "Sphere__" + sphereSize;
@@ -234,6 +263,10 @@ const createSphere = (standardMaterial) => {
 const createTorus = () => {
     const torusSize = 2 + Math.ceil((Math.random() * 20));
     const torusGeometry = new THREE.TorusKnotGeometry(10, 3, 228, 16);
+    // const torusMaterial = new THREE.MeshBasicMaterial({
+    //     color: 0xffffff,
+    //     // wireframe: true
+    // });
     const standardMaterial_ = new THREE.MeshStandardMaterial({
         roughness: 0.1,
         metalness: 0
@@ -305,18 +338,6 @@ const initSkyMaterial = (uniforms, vertexShader, fragmentShader) => {
 const initSky = (skyGeometry, skyMaterial) => {
     const sky = new THREE.Mesh(skyGeometry, skyMaterial);
     return sky;
-}
-
-const initLoader = () => {
-    const loader = new THREE.TextureLoader();
-    const texture = loader.load('./assets/textura.jpeg');
-    texture.anisotropy = 16;
-    const textureMaterial = new THREE.MeshLambertMaterial({ 
-        // color: 0xffffff,
-        map: texture,
-        fog: false, 
-    });
-    return textureMaterial;
 }
 
 const backgroundSphere = (scene) => {
