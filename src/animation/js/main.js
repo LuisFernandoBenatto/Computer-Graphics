@@ -421,7 +421,7 @@ const createCube = () => {
     const cubeGeometry = new THREE.BoxGeometry(30, 30, 30);
     const standardMaterial_ = new THREE.MeshStandardMaterial({
         roughness: 0.1,
-        metalness: 0
+        metalness: 0.5
     });
     const cube = new THREE.Mesh(cubeGeometry, standardMaterial_);
     cube.castShadow = true;
@@ -446,7 +446,7 @@ const createTorus = () => {
     const torusGeometry = new THREE.TorusKnotGeometry(10, 3, 228, 16);
     const standardMaterial_ = new THREE.MeshStandardMaterial({
         roughness: 0.1,
-        metalness: 0
+        metalness: 0.5
     });
     const torusKnot = new THREE.Mesh(torusGeometry, standardMaterial_);
     torusKnot.castShadow = true;
