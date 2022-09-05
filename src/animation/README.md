@@ -43,3 +43,12 @@ A animação trata-se de um projeto que faz uso da biblioteca Three.js, a anima�
 
 **Observação**: A animação já inicia com três flamingos. A criação de um novo objeto (de uma nova ave) é gerada totalmente de forma randômica. 
  
+ 
+ ## Exemplos
+ 
+ ![animatioThreejs_01](https://user-images.githubusercontent.com/49990149/188483152-ea1c9729-2d27-44f7-a9be-a300f343501b.png)
+ ![animatioThreejs_02](https://user-images.githubusercontent.com/49990149/188483603-54661d4a-f9ce-4c26-a84b-3b999b0a6d86.png)
+![animatioThreejs_03](https://user-images.githubusercontent.com/49990149/188484289-73e49c23-5c32-44cc-bc60-b8476bf5bbad.png)
+![animatioThreejs_04](https://user-images.githubusercontent.com/49990149/188484349-07284dce-12eb-42ef-a11a-334c67b59a94.png)
+![animatioThreejs_05](https://user-images.githubusercontent.com/49990149/188484395-66518fa0-2c43-4478-8eac-810c993258fe.png)
+![animatioThreejs_06](https://user-images.githubusercontent.com/49990149/188484407-0a5f6e10-1558-4c21-a140-1417b5bf1e93.png)
