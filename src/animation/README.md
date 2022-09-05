@@ -60,3 +60,5 @@ A animação trata-se de um projeto que faz uso da biblioteca Three.js, a anima�
 ```
 **Observação**: Ao invés da animação iniciar com três flamingos, agora ela inicia com três cavalos.
 
+![animatioThreejs_07](https://user-images.githubusercontent.com/49990149/188491171-de099df8-7f3c-42a6-8ad7-1966b450f299.png)
+![animatioThreejs_08](https://user-images.githubusercontent.com/49990149/188491214-87212bbc-55f4-49be-a62f-db1376201015.png)
